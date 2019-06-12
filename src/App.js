@@ -5,6 +5,10 @@ import Form from "./components/form";
 const API_KEY = "374aa627a2fe58102b78d411c628725d";
 
 class App extends Component {
+  state = {
+    recipes: []
+  };
+
   getRecipe = async e => {
     const recipeName = e.target.elements.recipeName.value;
     e.preventDefault();
@@ -13,7 +17,10 @@ class App extends Component {
       `https://www.food2fork.com/api/search?key=${API_KEY}&q=shredded%20chicken&count=5`
     );
     const data = await api_call.json();
-    console.log(data);
+    this.setState({
+      recipes: data.recipes
+    });
+    console.log(this.state.recipes);
   };
   render() {
     return (
